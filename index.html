@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/reboot.css">
+  <link rel="stylesheet" href="css/style.css">
+  <title>応用情報 午前問題集 進捗確認</title>
+</head>
+
+<body>
+  <section id="top">
+    <h1><span style="color: #ff7b00;">応用</span>情報 午前問題集 進捗確認</h1>
+    <p id="description">応用情報午前問題集の進捗を表示するサイトです。<br>CSV形式のファイルをアップロードしてください。<br>使い方・CSVファイルのダウンロードはこちら<br>→ <a
+        href="https://github.com/tawainfer/basic-tech-am">basic-tech-am(Github)</a></p>
+
+    <div id="countdown">
+      <table>
+        <tr>
+          <th>試験名</th>
+          <th>令和5年度春期試験</th>
+        </tr>
+        <tr>
+          <td>日時</td>
+          <td>2023年4月16日(日)</td>
+        </tr>
+        <tr>
+          <td>残り時間</td>
+          <td><span id="day1"></span>日<span id="hour1"></span>時間<span id="min1"></span>分<span id="sec1"></span>秒</td>
+        </tr>
+      </table>
+    </div>
+
+    <div id="option">
+      <p><input id="heatmap" type="checkbox" name="heatmap" value="1" checked>ヒートマップ表示 <input id="hundred"
+          type="checkbox" name="hundred" value="1">100%を強調<br><input id="border" type="checkbox" name="border" value="1"
+          onchange="isBorder()">ボーダーカラー表示</p>
+
+      <div id="settingBorder">
+        <p>0~100の範囲で数値を指定することで進捗の色分けが出来ます。<br>(赤色と青色の大小関係が逆転すると上手く反映されません)</p>
+        <p><input id="red" type="number" value="70">%以上を<span style="color:#e00;">赤色</span>で強調<br><input id="blue"
+            type="number" value="30">%未満を<span style="color:#00e;">青色</span>で強調</p>
+      </div>
+
+      <p><input id="csv_file" type="file"></p>
+    </div>
+
+    <p id="message"></p>
+  </section>
+
+  <section id="news">
+    <h2>更新履歴</h2>
+    <p><i>2022-12-09</i><br>サイトを公開しました。
+    </p>
+  </section>
+
+  <p id="menu">
+    <input type="button" name="mode" id="buttonData" value="Data" onclick="changeMode(`data`)">
+    <input type="button" name="mode" id="buttonGacha" value="Gacha" onclick="changeMode(`gacha`)">
+  </p>
+
+  <div id="data">
+    <div id="all">
+      <h2>●全範囲</h2>
+      <p><b>取り組み(1回以上)</b>...<span id="allOnce"></span>
+        <br>一度でも取り組んだことがある問題の割合です。
+      </p>
+      <p><b>取り組み(2回以上)</b>...<span id="allTwice"></span>
+        <br>2周した問題の割合です。
+      </p>
+      <p><b>達成率A</b>...<span id="allAchievementA"></span>
+        <br>一度でも正解したことがある問題の割合です。<b>(未解答を除外)</b>
+      </p>
+      <p><b>達成率B</b>...<span id="allAchievementB"></span>
+        <br>一度でも正解したことがある問題の割合です。<b>(未解答は不正解扱い)</b>
+      </p>
+      <p><b>理解度A</b>...<span id="allUnderstandingA"></span>
+        <br>問題を最後に解いた際に正解したかどうかをまとめた割合です。<b>(未解答を除外)</b>
+      </p>
+      <p><b>理解度B</b>...<span id="allUnderstandingB"></span>
+        <br>問題を最後に解いた際に正解したかどうかをまとめた割合です。<b>(未解答は不正解扱い)</b>
+      </p>
+    </div>
+  </div>
+
+  <div id="gacha">
+    <h2>問題ガチャ</h2>
+    <p>指定した条件に一致した問題をリスト形式で表示します。<br>
+      問題数や表示順を指定して試験形式で表示したり、苦手な問題や直近3年分などの条件で検索する事で直前対策にも活用出来ます。
+    </p>
+
+    <div class="gachaOption">
+      <h3>●出題年</h3>
+      <p>
+        <select id="selectDownYear"></select> 年 ～
+        <select id="selectUpYear"></select> 年
+      </p>
+    </div>
+
+    <div class="gachaOption">
+      <h3>●表示問題数</h3>
+      <p>入力を空欄か0以下の値にした場合は検索オプションに一致した問題を全て表示します。</p>
+      <form id="showingCnt">
+        <input type="radio" id="showingAll" name="showingMode" onchange="changeShowingMode()"> 全範囲から指定する<br>
+        <input type="radio" name="showingMode" onchange="changeShowingMode()" checked> 分野別に指定する
+      </form>
+
+      <div id="questionAll">
+        <p style="background-color: #aaa;">全分野(ランダム)<br><input type="number" id="numberAll" class="questionCnt"
+            value="80"> 問
+        </p>
+      </div>
+
+      <div id="questionGenre">
+        <p style="background-color: #31a9ee;">テクノロジ(T)<br><input type="number" id="numberT" class="questionCnt"
+            value="50"> 問</p>
+        <p style="background-color: #ec8c37;">マネジメント(M)<br><input type="number" id="numberM" class="questionCnt"
+            value="10"> 問</p>
+        <p style="background-color: #aee442;">ストラテジ(S)<br><input type="number" id="numberS" class="questionCnt"
+            value="20"> 問</p>
+      </div>
+    </div>
+
+    <div class="gachaOption">
+      <h3>●問題の抽出方法</h3>
+      <form id="extractProblems">
+        <input type="radio" name="extractProblemsProperty" value="a" checked> 全ての問題を抽出する<br>
+        <input type="radio" name="extractProblemsProperty" value="b"> 一度でも間違えた問題を抽出する<br>
+        <input type="radio" name="extractProblemsProperty" value="c"> 最後に間違えた問題を抽出する<br>
+        <input type="radio" name="extractProblemsProperty" value="d"> 一度も正解したことのない問題を抽出する<br>
+        <input type="radio" name="extractProblemsProperty" value="e"> 一度も取り組んだことのない問題を抽出する
+      </form>
+    </div>
+
+    <div class="gachaOption">
+      <h3>●表示順</h3>
+      <form id="orderProblems">
+        <input type="radio" name="orderProblemsProperty" id="shuffleProblems" value="a" checked> 表示順をシャッフルする<br>
+        <input type="radio" name="orderProblemsProperty" id="sortProblems" value="b"> 問題集の掲載順で表示する(昇順ソート)<br>
+        <!-- <input type="radio" name="orderProblemsProperty" id="sortExemptionProblems" value="c"> 午前免除試験の出題順で表示する(表示順をシャッフル
+        &#38; T→M→Sの順で表示) -->
+      </form>
+    </div>
+
+    <p><input type="button" id="searchProblems" value="検索" onclick="makeChoiceList()"></p>
+  </div>
+
+  <script src="script/script.js"></script>
+</body>
+
+</html>

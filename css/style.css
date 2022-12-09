@@ -1,0 +1,183 @@
+body {
+  /* テキストのデフォルト書式 */
+  color: #000;
+  font-size: 16px;
+  font-family: "Hiragino Kaku Gothic Pro", Meiryo, Osaka, "MS PGothic", sans-serif;
+  text-rendering: geometricPrecision;
+  /* ページの背景色 */
+  background-color: #f5f5dc;
+}
+
+#top {
+  margin-left: 15px;
+  margin-top: 15px;
+  padding-bottom: 15px;
+}
+
+h1 {
+  font-size: 26px;
+}
+
+#description {
+  display: inline-block;
+  border: 1.5px solid #000000;
+  padding: 5px;
+  margin-bottom: 20px;
+}
+
+#countdown table {
+  text-align: center;
+  background-color: #eee;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+#countdown table th, td {
+  border: 1px solid #000;
+  width: 120px;
+  padding: 10px;
+}
+
+#option {
+  padding-top: 5px;
+}
+
+#settingBorder {
+  display: none;
+}
+
+#red {
+  width: 80px;
+}
+
+#blue {
+  width: 80px;
+}
+
+#message {
+  font-size: 16px;
+}
+
+#news {
+  background-color: #ddd;
+  padding-bottom: 5px;
+}
+
+#news h2 {
+  padding-top: 10px;
+  margin-left: 15px;
+  font-size: 20px;
+}
+
+#news p {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 0px 0px 10px 0px;
+  line-height: 26px;
+}
+
+#menu {
+  display: none;
+  padding-left: 15px;
+  padding-top: 10px;
+}
+
+#menu input {
+  display: inline-block;
+  width: 100px;
+  height: 45px;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: center;
+  line-height: 45px;
+  cursor: pointer;
+  border: 2px solid #006dd9;
+  border-radius: 5px;
+}
+
+#data p {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 0px;
+  padding-bottom: 30px;
+}
+
+#all {
+  display: none;
+}
+
+#all h2 {
+  font-size: 24px;
+}
+
+#all p {
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 26px;
+}
+
+#data table {
+  text-align: center;
+  background-color: #eee;
+}
+
+#data table th, td {
+  width: 200px;
+  white-space: normal;
+}
+
+#data div {
+  padding: 15px;
+}
+
+#gacha {
+  display: none;
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+#gacha div.gachaOption {
+  padding-top: 0px;
+  padding-top: 30px;
+}
+
+#gacha h3 {
+  font-size: 18px;
+}
+
+#gacha select {
+  display: inline;
+  width: 80px;
+}
+
+#gacha #questionAll {
+  display: none;
+}
+
+#gacha #questionAll p {
+  display: inline-block;
+  padding: 5px;
+}
+
+#gacha #questionAll input.questionCnt {
+  width: 80px;
+}
+
+#gacha #questionGenre p {
+  display: inline-block;
+  padding: 5px;
+}
+
+#gacha #questionGenre input.questionCnt {
+  width: 80px;
+}
+
+#gacha #questionAll, #questionGenre {
+  padding-top: 15px;
+}
+
+#gacha #searchProblems {
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
